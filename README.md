@@ -18,10 +18,12 @@ commands is showcased in the manual.
 
 ## License
 
-Font Awesome font
-Author: Dave Gandy
-Licence: SIL Open Font License, version 1.1
+### Font Awesome font
+**Author:** Dave Gandy
 
-fontawesome package
-Author: Xavier Danaux <xdanaux@gmail.com>
-Licence: The LaTeX Project Public Li­cense, version 1.3c
+**Licence:** SIL Open Font License, version 1.1
+
+### fontawesome package
+**Author:** Xavier Danaux <xdanaux@gmail.com>
+
+**Licence:** The LaTeX Project Public Li­cense, version 1.3c
