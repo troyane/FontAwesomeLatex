@@ -15,7 +15,7 @@ Script `fa_latex_gen.py` expects existing of next input files (placed inside fol
 
  - `template.sty`: changed `fontaweesome.sty`, so python script `fa_latex_gen.py` can insert generated information inside.
  - `fontawesome_reduced.css`: part of file [font-awesome.css](https://github.com/FortAwesome/Font-Awesome/blob/master/css/font-awesome.css). This file provides icon names for Font Awesome 4.1 and its new aliases.
- - `backward_cap.txt`: reduced list from [wiki about upgrading FA from 3.2.1 to 4](Reduced list from https://github.com/FortAwesome/Font-Awesome/wiki/Upgrading-from-3.2.1-to-4) -- for holding backward capability issues.
+ - `backward_cap.txt`: reduced list from [wiki](https://github.com/FortAwesome/Font-Awesome/wiki/Upgrading-from-3.2.1-to-4) about upgrading FA from 3.2.1 to 4 -- for holding backward capability issues.
 
 ### Output files
  
