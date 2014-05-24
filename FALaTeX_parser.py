@@ -14,6 +14,7 @@ import re
 
 # constants
 path_to_css = "input/fontawesome_reduced.css"
+path_to_backward_cap = "input/backward_cap.txt"
 path_to_template = "input/template.tex"
 path_to_output_file = "output/fontawesome.sty"
 # icon-specific commands (in output file)
@@ -24,6 +25,28 @@ latex_aliases_pattern = r'\expandafter\def\csname faicon@%(alias_name)s\endcsnam
 # regex to catch hex number
 fa_hex = re.compile(r'(\\)(f[0-9a-fA-F]+)')
 
+#regex to catch backward capability string:
+back_cap_pattern = re.compile(r'\*\s+`(\S+)`\s+->\s+`(\S+)`(.*)[,.](\s+)?')
+
+
+def match_back_cap_line(line):
+    """
+    Check weather line matches back_cap_pattern (ex. * `bar-chart` -> `bar-chart-o` (info),) and returns it in (old, new, comment)
+    Otherwise returns none
+    """
+    matches = back_cap_pattern.search(line)
+    if matches:
+        old = matches.groups()[0]
+        new = matches.groups()[1]
+        comment = matches.groups()[2]
+        return [old, new, comment]
+    else:
+        print "Wrong input: ", line
+        return None
+
+print match_back_cap_line("* `bar-chart` -> `bar-chart-o`,")
+
+print 1
 
 def to_latex_hex(hex_str):
     """
@@ -129,10 +152,35 @@ def main():
     template = f_template.read()
     f_template.close()
 
+    print "Reading backward capability icons: ", path_to_backward_cap
+    list_of_capability_aliases = ""
+    f_back = open(path_to_backward_cap, "r")
+    count_back_cap = 0
+    for line in f_back:
+        pair = match_back_cap_line(line)
+        if pair is not None:
+            cur_comment = pair[2]
+            old_alias = to_csnames(pair[0])
+            new_alias = to_csnames(pair[1])
+            pattern_dict = {'alias_name': old_alias[0],
+                            'primary': new_alias[1],
+                            'alias_icon': old_alias[1],
+                            'primary_icon': new_alias[1]}
+            prep_back_alias = latex_aliases_pattern % pattern_dict
+            list_of_capability_aliases += "\n" + prep_back_alias
+            if cur_comment != "":
+                list_of_capability_aliases += " % " + cur_comment
+            count_back_cap += 1
+            # make groups of ten records in capability aliases
+            if count_back_cap % 10 == 0:
+                list_of_capability_aliases += "\n"
+    f_back.close()
+
     print "Writing output to: ", path_to_output_file
     f_result = open(path_to_output_file, "w")
     result_pattern = {'listOfIcons': list_of_icons,
-                      'listOfAliases': list_of_aliases}
+                      'listOfAliases': list_of_aliases,
+                      'listOfCapabilityAliases': list_of_capability_aliases}
     output = template % result_pattern
     f_result.write(output)
     f_result.close()
