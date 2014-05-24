@@ -7,7 +7,7 @@ Script `fa_latex_gen.py` is designed to generate `fontawesome.sty` file (read be
 ### Requirements
 
  - Python 2.7
- - Package tinycss (`pip install tiny css`)
+ - Package tinycss (`pip install tinycss`)
 
 ### Input files
 
