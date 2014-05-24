@@ -29,6 +29,32 @@ fa_hex = re.compile(r'(\\)(f[0-9a-fA-F]+)')
 back_cap_pattern = re.compile(r'\*\s+`(\S+)`\s+->\s+`(\S+)`(.*)[,.](\s+)?')
 
 
+def get_current_date_time():
+    """
+    Returns current time
+    """
+    import datetime
+
+    now = datetime.datetime.now()
+    return now.strftime("%Y-%m-%d %H:%M")
+
+
+def get_git_info():
+    """
+    Executes command 'git describe --long --dirty --tags' and returns result
+    """
+    import subprocess
+    return subprocess.check_output(['git', 'describe', '--long', '--dirty', '--tags'])
+
+
+def get_machine_info():
+    """
+    Executes command 'uname -a' and returns result
+    """
+    import subprocess
+    return subprocess.check_output(['uname', '-a'])
+
+
 def match_back_cap_line(line):
     """
     Check weather line matches back_cap_pattern (ex. * `bar-chart` -> `bar-chart-o` (info),) and returns it in (old, new, comment)
@@ -70,7 +96,12 @@ def to_csnames(name):
 
 
 def main():
-    print "Started"
+    cur_date = get_current_date_time()
+    machine = get_machine_info().strip()
+    git_info = get_git_info().strip()
+
+    print "Started (" + git_info + "), " + cur_date + "\n\tat " + machine
+
     parser = tinycss.make_parser('page3')
 
     print "Parsing CSS file: ", path_to_css
@@ -141,9 +172,6 @@ def main():
         if count_sumary % 10 == 0:
             list_of_icons += "\n"
 
-    print "Summary: \n\tcount of icons: ", count_sumary, " (with ", count_aliases, " aliaces)", \
-        "\n\tUnique icons: ", count_sumary - count_aliases
-
     print "Reading template: ", path_to_template
     f_template = open(path_to_template, "r")
     template = f_template.read()
@@ -173,9 +201,18 @@ def main():
                 list_of_capability_aliases += "\n"
     f_back.close()
 
+    print "Summary: \n\tcount of icons: " + str(count_sumary) + " (with " + str(count_aliases) + " aliaces)" + \
+          "\n\tUnique icons: " + str(count_sumary - count_aliases) + \
+          "\n\tBackward capability icons: " + str(count_back_cap)
+
+
     print "Writing output to: ", path_to_output_file
     f_result = open(path_to_output_file, "w")
-    result_pattern = {'listOfIcons': list_of_icons,
+
+    result_pattern = {'date_generation': cur_date,
+                      'machine': machine,
+                      'git_info': git_info,
+                      'listOfIcons': list_of_icons,
                       'listOfAliases': list_of_aliases,
                       'listOfCapabilityAliases': list_of_capability_aliases}
     output = template % result_pattern
