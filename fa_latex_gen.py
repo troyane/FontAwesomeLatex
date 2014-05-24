@@ -15,7 +15,7 @@ import re
 # constants
 path_to_css = "input/fontawesome_reduced.css"
 path_to_backward_cap = "input/backward_cap.txt"
-path_to_template = "input/template.tex"
+path_to_template = "input/template.sty"
 path_to_output_file = "output/fontawesome.sty"
 # icon-specific commands (in output file)
 latex_pattern = r'\expandafter\def\csname faicon@%(csname)s\endcsname {\symbol{%(hex)s}} \def%(icon_name)s {{\FA\csname faicon@%(csname)s\endcsname}}'
@@ -44,9 +44,6 @@ def match_back_cap_line(line):
         print "Wrong input: ", line
         return None
 
-print match_back_cap_line("* `bar-chart` -> `bar-chart-o`,")
-
-print 1
 
 def to_latex_hex(hex_str):
     """
