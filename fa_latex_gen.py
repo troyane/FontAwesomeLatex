@@ -11,6 +11,7 @@ __author__ = 'Nazar Gerasymchk, troyan3 at gmail dot com'
 
 import tinycss
 import re
+import subprocess
 
 # constants
 path_to_css = "input/fontawesome_reduced.css"
@@ -31,10 +32,9 @@ back_cap_pattern = re.compile(r'\*\s+`(\S+)`\s+->\s+`(\S+)`(.*)[,.](\s+)?')
 
 def get_current_date_time():
     """
-    Returns current time
+    Returns current date and time
     """
     import datetime
-
     now = datetime.datetime.now()
     return now.strftime("%Y-%m-%d %H:%M")
 
@@ -43,7 +43,6 @@ def get_git_info():
     """
     Executes command 'git describe --long --dirty --tags' and returns result
     """
-    import subprocess
     return subprocess.check_output(['git', 'describe', '--long', '--dirty', '--tags'])
 
 
@@ -51,7 +50,6 @@ def get_machine_info():
     """
     Executes command 'uname -a' and returns result
     """
-    import subprocess
     return subprocess.check_output(['uname', '-a'])
 
 
@@ -90,8 +88,13 @@ def to_csnames(name):
     """
     name is icon name from CSS (ex. fa-search-plus), returns reformated name pair (ex. (search-plus, SearchPlus))
     """
-    csname = name[3:]
+    # hyphen_pos = name.find('-')
+    if name.lower().startswith("fa-"):
+        csname = name[3:]
+    else:
+        csname = name
     icon_name = r'\fa' + ''.join(w.title() for w in re.split(r'-', csname))
+
     return csname, icon_name
 
 
