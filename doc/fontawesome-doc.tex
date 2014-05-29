@@ -31,7 +31,7 @@ The \textsf{fontawesome} package grants access to 439 web-related icons provided
 
 This package requires the \textsf{fontspec} package and either the \hologo{Xe}\hologo{(La)TeX} or Lua\hologo{(La)TeX} engine to load the included otf font.
 \end{abstract}
-
+\def\currentversion{4.1}
 \changes{v4.1.0} {2014/05/29}{Update to match Font Awesome version 4.1.0. New code generation.}
 \changes{v3.1.1} {2013/05/10}{Update to match Font Awesome version 3.1.1, with 53 new icons.}
 \changes{v3.0.2-1}{2013/03/23}{Bigfix release: corrected the swap of the \cs{text-height} and \cs{text-width} icons.}
@@ -74,7 +74,7 @@ Once the \textsf{fontawesome} package loaded, icons can be accessed through the 
 \newenvironment{showcase}%
   {%
 % \begin{longtable}{ccp{3cm}p{3.5cm}p{1cm}}% debug: shows icons with both generic and specific commands
-   \begin{longtable}{cp{3cm}p{3.5cm}p{1cm}}
+   \begin{longtable}{cp{5cm}p{5cm}p{3cm}}
    \cmidrule[\heavyrulewidth]{1-3}% \toprule
 % \bfseries Icon& \bfseries Icon& \bfseries Name& \bfseries Direct command& \\% debug
    \bfseries Icon& \bfseries Name& \bfseries Direct command& \\
@@ -86,16 +86,21 @@ Once the \textsf{fontawesome} package loaded, icons can be accessed through the 
   \faicon{#1}& \itshape #1& \ttfamily \textbackslash #2\index{\ttfamily \textbackslash #2}& \IfNoValueTF{#3}{}{\tag{#3}}\\}
 \newcommand{\tag}[1]{{%
   \small\sffamily%
-  \ifthenelse{\equal{#1}{new}}{%
+  \ifthenelse{\equal{#1}{\currentversion}}{%
     \tikz[baseline={(TAG.base)}]{
-      \node[white, fill=myblue, rounded corners=3pt, inner sep=1.5pt] (TAG) {new!\vphantom{Ay!}};
-    }}{}%
-  \ifthenelse{\equal{#1}{gone}}{%
-    \tikz[baseline={(TAG.base)}]{
-      \node[black!50, fill=black!25, rounded corners=3pt, inner sep=1.5pt] (TAG) {gone (?)\vphantom{Ay!}};
-    }}{}%
-  \ifthenelse{\equal{#1}{alias}}{%
-    \textcolor{black!50}{(alias)}}{}%
+      \node[white, fill=myblue, rounded corners=3pt, inner sep=1.5pt] (TAG) {New in \currentversion\vphantom{Ay!}};
+    }}{
+	\ifthenelse{\equal{#1}{gone}}{%
+    		\tikz[baseline={(TAG.base)}]{
+      		\node[black!50, fill=black!25, rounded corners=3pt, inner sep=1.5pt] (TAG) {gone (?)\vphantom{Ay!}};
+    }}	{
+  		\ifthenelse{\equal{#1}{alias}}{%
+    			\textcolor{black!50}{(alias)}}{
+    				\tikz[baseline={(TAG.base)}]{
+      				\node[white, fill=black!65, rounded corners=3pt, inner sep=1.5pt] (TAG) {Since #1\vphantom{Ay!}};
+				}}%
+		}%
+	}%
   }}
 
 \include{fontawesome-doc-symbols}

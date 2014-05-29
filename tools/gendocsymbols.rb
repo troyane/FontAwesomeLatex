@@ -24,7 +24,7 @@ categories.keys.each do |cat|
 	puts "\\subsection{#{cat}}"
 	puts "\\begin{showcase}"
 	categories[cat].each do |icon|
-		puts "\\showcaseicon{#{icon['id']}}{fa#{icon['id'].gsub('-','_').camelize}}{#{icon['created'].to_s == CURRENT_VERSION ? 'new' : ''}}% unicode:#{icon['unicode']} / created:#{icon['created']}"
+		puts "\\showcaseicon{#{icon['id']}}{fa#{icon['id'].gsub('-','_').camelize}}{#{icon['created'].to_s}}% unicode:#{icon['unicode']} / created:#{icon['created']}"
 		unless icon['aliases'].nil? then
 			icon['aliases'].each do |aliasentry|
 				puts "\\showcaseicon{#{aliasentry}}{fa#{aliasentry.gsub('-','_').camelize}}{alias}"

@@ -1,4 +1,5 @@
 PACKAGENAME=fontawesome
+VERSION=4.1
 
 doc: doc/$(PACKAGENAME)-doc.pdf
 
