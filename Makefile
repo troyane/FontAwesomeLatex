@@ -1,5 +1,7 @@
 PACKAGENAME=fontawesome
 
+doc: doc/$(PACKAGENAME)-doc.pdf
+
 package: doc/$(PACKAGENAME)-doc.pdf
 	cp README.md README
 	ctanify --pkgname $(PACKAGENAME) doc/*.pdf *.sty README.md LICENSE README
