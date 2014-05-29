@@ -19,5 +19,10 @@ Author: Dave Gandy
 Licence: SIL Open Font License, version 1.1
 
 fontawesome package
-Author: Xavier Danaux <xdanaux@gmail.com>
+Authors: Xavier Danaux <xdanaux@gmail.com>  
+           -- original LaTeX code
+         Nazar Gerasymchuk <https://github.com/troyane>, 
+         Geoffrey Gouez <https://github.com/Cicatrice> 
+           -- new LaTeX code to update to Font Awesome 4.1
+Version 4.1.0, released on May 29, 2014
 Licence: The LaTeX Project Public Li­cense, version 1.3c
