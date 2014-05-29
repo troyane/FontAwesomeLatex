@@ -1,5 +1,5 @@
 *Updated ReadMe due to new changes to it. Original ReadMe file is `README`.*
-
+<!--
 ## Python script `fa_latex_gen.py`
 
 Script `fa_latex_gen.py` is designed to generate `fontawesome.sty` file (read below).
@@ -24,6 +24,7 @@ Script `fa_latex_gen.py` expects existing of next input files (placed inside fol
 ### Author
 
 Created by Nazar Gerasymchuk (troyan3 at gmail dot com).
+-->
 
 
 ## fontawesome -- high quality web icons
@@ -50,6 +51,12 @@ commands is showcased in the manual.
 **Licence:** SIL Open Font License, version 1.1
 
 #### fontawesome package
-**Author:** Xavier Danaux <xdanaux@gmail.com>
+**Authors:** 
+
+ - Xavier Danaux [xdanaux@gmail.com](xdanaux@gmail.com) -- original LaTeX code
+ - Nazar Gerasymchuk [Troyane @ github](https://github.com/troyane) -- new LaTeX code to update to Font Awesome 4.1
+ - Geoffrey Gouez [Cicatrice @ github](https://github.com/Cicatrice) -- new LaTeX code to update to Font Awesome 4.1
+
+Version 4.1.0, released on May 29, 2014
 
 **Licence:** The LaTeX Project Public Li­cense, version 1.3c
