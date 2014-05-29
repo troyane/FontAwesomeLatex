@@ -4,8 +4,7 @@ VERSION=4.1
 doc: doc/$(PACKAGENAME)-doc.pdf
 
 package: doc/$(PACKAGENAME)-doc.pdf
-	cp README.md README
-	ctanify --pkgname $(PACKAGENAME) doc/*.pdf *.sty README.md LICENSE README
+	ctanify --pkgname $(PACKAGENAME) doc/*.pdf *.sty README LICENSE "FontAwesome.otf=fonts/opentype/public/fontawesome/"
 
 doc/$(PACKAGENAME)-doc.pdf: 
 	TEXINPUTS=.:doc: xelatex -output-directory=doc doc/$(PACKAGENAME)-doc.tex
