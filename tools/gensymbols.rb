@@ -3,7 +3,16 @@
 require 'active_support/core_ext/string'
 
 require 'yaml'
-icons = YAML.load_file('../Font-Awesome/src/icons.yml')
+
+
+YAML_FILE=ARGV[0]
+
+if YAML_FILE.nil? then
+	STDERR.puts "No YAML file given. E.g. Font-Awesome/src/icons.yml"
+	exit 2
+end
+
+icons = YAML.load_file(YAML_FILE)
 categories = {}
 
 icons['icons'].each do |icon|
