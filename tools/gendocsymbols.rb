@@ -1,8 +1,14 @@
 require 'active_support/core_ext/string'
 require 'yaml'
 
-SOURCE_FILE=ARGV[0]
-CURRENT_VERSION='4.1'
+
+CURRENT_VERSION=ARGV[0]
+SOURCE_FILE=ARGV[1]
+
+if CURRENT_VERSION.nil? then
+	STDERR.puts "No version given."
+	exit 2
+end
 
 if SOURCE_FILE.nil? then
 	STDERR.puts "No source file given."
